@@ -4,7 +4,7 @@ import { defineStore } from "pinia";
 
 export const useAuthStore = defineStore("auth", {
   state: () => ({
-    apiUrl: process.env.VITE_APP_API_URL,
+    apiUrl: import.meta.env.VITE_APP_API_URL,
     userLogin: {},
     response: {
       status: null,

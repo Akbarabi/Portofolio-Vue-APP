@@ -17,12 +17,21 @@
 
 <script setup>
 import Layouts from "@/layouts/main.vue";
-import { onMounted } from "vue";
 import { useRouter } from 'vue-router';
+import { usePostStore } from '@/stores/pinia';
 
 const router = useRouter();
+const postStore = usePostStore();
+
 
 const createPost = async () => {
+  postStore.openForm('create');
+  router.push({ name: "post-form" });
+}
+
+const editPost = async (id) => {
+  postStore.openForm('edit');
+  await postStore.getPostById(id);
   router.push({ name: "post-form" });
 }
 </script>

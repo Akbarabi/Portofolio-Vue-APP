@@ -1,9 +1,10 @@
 import axios from "axios";
 import { defineStore } from "pinia";
 
-export default usePostStore = defineStore("post", {
+export const usePostStore = defineStore("post", {
   state: () => ({
-    apiUrl: process.env.VITE_APP_API_URL,
+    apiUrl: import.meta.env.VITE_APP_API_URL,
+    post: {},
     posts: [],
     totalData: 0,
     response: {
@@ -22,6 +23,9 @@ export default usePostStore = defineStore("post", {
   }),
 
   actions: {
+    async openForm(action) {
+      this.formAction.action = action;
+    },
     async getPosts() {
       try {
         const response = await axios.get(`${this.apiUrl}/api/v1/posts`);
@@ -40,6 +44,25 @@ export default usePostStore = defineStore("post", {
           list: error.response.data.errors,
         };
       }
-    }
-  }
+    },
+
+    async getPostsById() {
+      try {
+        const response = await axios.get(`${this.apiUrl}/api/v1/posts`);
+
+        this.post = response.data.data.data;
+
+        this.response = {
+          status: response.status,
+          message: response.data.message,
+        };
+      } catch (error) {
+        this.response = {
+          status: error.response?.status,
+          message: error.message,
+          list: error.response.data.errors,
+        };
+      }
+    },
+  },
 });
