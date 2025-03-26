@@ -30,7 +30,7 @@ export const usePostStore = defineStore("post", {
       try {
         const response = await axios.get(`${this.apiUrl}/api/v1/posts`);
 
-        this.posts = response.data.data.data;
+        this.posts = response.data.data.list;
         this.totalData = response.data.data.total;
 
         this.response = {
@@ -41,7 +41,7 @@ export const usePostStore = defineStore("post", {
         this.response = {
           status: error.response?.status,
           message: error.message,
-          list: error.response.data.errors,
+          list: error.response?.data.errors,
         };
       }
     },

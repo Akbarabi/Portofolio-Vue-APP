@@ -1,3 +1,4 @@
+import { showErrorToast } from '@/helpers/alert';
 import { useAuthStore } from '@/stores/pinia';
 import axios from 'axios';
 
@@ -19,7 +20,7 @@ export function axiosInterceptors( ) {
 
         return config;
     }, error => {
-        // Better if show error message using toast
+        showErrorToast('Error', 'Terjadi kesalahan pada request');
 
         return Promise.reject(error);
     });

@@ -1,12 +1,12 @@
 <template>
   <!-- Dropzone -->
   <div v-if="!localImageUrl && !localCroppedImageUrl"
-    class="relative group border-2 border-dashed border-gray-700 hover:border-blue-500 rounded-lg transition-all duration-200 overflow-hidden"
+    class="h-full relative group border-2 border-dashed border-gray-700 hover:border-blue-500 rounded-lg transition-all duration-200 overflow-hidden"
     :class="{ 'border-blue-500 bg-blue-500/10': isDragging }" @dragover.prevent="isDragging = true"
-    @dragleave.prevent="isDragging = false" @drop.prevent="handleFileDrop">
+    @dragleave.prevent="isDragging = false" @drop.prevent="onDrop">
     <input type="file" name="photo" id="photo" @change="onFileChange"
       class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" />
-    <div class="flex flex-col items-center justify-center p-6 text-center">
+    <div class="flex flex-col items-center justify-center p-6 text-center h-full">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
         class="lucide lucide-image text-gray-400 mb-2 group-hover:text-blue-400 transition-colors duration-200">
@@ -105,12 +105,14 @@ export default {
     onDrop(event) {
       this.isDragging = false;
       const files = event.dataTransfer.files;
+      console.log(files)
       if (files.length > 0) {
         this.onFileChange({ target: { files: [files[0]] } });
       }
     },
     onFileChange(event) {
       const file = event.target.files[0];
+      console.log(file)
       if (file) {
         this.tempImageUrl = URL.createObjectURL(file);
         this.openCropperModal();

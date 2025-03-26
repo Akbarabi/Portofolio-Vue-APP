@@ -1,10 +1,10 @@
 <template>
   <Loader v-if="isLoading"></Loader>
 
-  <div v-else class="p-6 min-h-screen">
+  <div v-else class="p-6">
     <div class="flex justify-between items-center mb-4">
       <button
-        class="text-sm text-blue-500 hover:text-blue-700 font-medium text-center px-4 py-2 rounded-md cursor-pointer"
+        class="text-sm bg-blue-600 hover:text-blue-700 font-medium text-center px-4 py-2 rounded-md cursor-pointer"
         @click="$router.back()">
         <i class="fas fa-arrow-left mr-2"></i> Back
       </button>
@@ -36,10 +36,8 @@
 
       <!-- Bagian Kanan: Preview Gambar dengan Tombol Hapus -->
       <div>
-        <label class="text-sm text-slate-800 font-bold mb-2">Foto</label>
         <ImageCropper :imageUrl="imageUrl" :aspectRatio="16 / 9" @update:imageUrl="imageUrl = $event"
           @update:croppedImageUrl="croppedImageUrl = $event; formModel.photo = $event;" />
-        {{ formModel.photo }}
       </div>
     </form>
 

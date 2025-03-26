@@ -2,7 +2,7 @@
   <NavBar></NavBar>
 
   <Loader v-if="isLoading"></Loader>
-  <div v-else class="bg-gray-900/95 lg:ml-64 p-4 md:p-6 lg:p-6 min-h-screen">
+  <div v-else class="bg-gray-900/95 md:ml-64 lg:ml-64 p-4 md:p-6 lg:p-6 min-h-screen">
     <slot></slot>
   </div>
 </template>
