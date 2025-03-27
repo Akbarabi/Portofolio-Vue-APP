@@ -1,4 +1,12 @@
 export default [
+    {
+    path: "/testing",
+    name: "testing",
+    meta: {
+      title: "Testing",
+    },
+    component: () => import("../views/testing/index.vue"),
+  },
   {
     path: "/login",
     name: "login",

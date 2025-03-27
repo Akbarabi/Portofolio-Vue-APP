@@ -44,6 +44,14 @@
             <span class="ml-auto text-xs bg-indigo-900/30 text-indigo-400 px-2 py-1 rounded-full">45</span>
           </router-link>
         </div>
+
+        <router-link to="/testing"
+            :class="`flex w-full items-center gap-3 p-3 rounded-lg transition-colors cursor-pointer
+                          ${currentRoute === '/testing' ? 'bg-indigo-900/30 text-indigo-400' : 'hover:bg-gray-800 text-gray-400'}`">
+            <i class="fas fa-newspaper w-5 text-center"></i>
+            <span class="text-sm font-medium">Testing</span>
+            <span class="ml-auto text-xs bg-indigo-900/30 text-indigo-400 px-2 py-1 rounded-full">45</span>
+          </router-link>
       </div>
     </div>
   </nav>
