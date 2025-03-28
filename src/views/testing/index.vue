@@ -1,5 +1,5 @@
 <template>
-    <div class="space-y-4">
+    <div class="flex flex-col space-y-4">
         <div>
             <Button> Default Button </Button>
         </div>
@@ -53,14 +53,30 @@
 
         <div>
             <Button @click="handleClick"> Click Me </Button>
+            <Button @click="handleClickSuccess"> Success Toast </Button>
+            <Button @click="handleClickError"> Error Toast </Button>
+            <Button @click="handleClickConfirm"> Confirm Toast </Button>
         </div>
     </div>
 </template>
 
 <script setup>
 import Button from "../../components/widgets/button.vue";
+import { showSuccessToast, showErrorToast, showDeleteConfirmationDialog } from "@/helpers/alert";
 
 const handleClick = () => {
     alert("Button Clicked!");
+};
+
+const handleClickSuccess = () => {
+    showSuccessToast("Success Toast");
+};
+
+const handleClickError = () => {
+    showErrorToast("Error Toast");
+};
+
+const handleClickConfirm = () => {
+    showDeleteConfirmationDialog("Confirm Toast");
 };
 </script>

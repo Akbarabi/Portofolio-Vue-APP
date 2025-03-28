@@ -1,6 +1,6 @@
 <template>
     <button
-        class="inline-flex items-center font-sans font-medium text-center transition-all duration-300 ease-in disabled:opacity-70 disabled:shadow-none disabled:cursor-not-allowed"
+        class="inline-flex items-center font-sans font-medium text-center transition-all duration-300 ease-in disabled:opacity-70 disabled:shadow-none disabled:cursor-not-allowed focus:outline-none"
         :class="computedClasses" :disabled="disabled" :loading="loading">
         <svg v-if="loading" fill="none" class="animate-spin h-4 w-4 mr-2" viewBox="0 0 64 64"
             xmlns="http://www.w3.org/2000/svg">
@@ -59,21 +59,51 @@ const props = defineProps({
 })
 
 const baseColors = {
-    primary: { bg: 'bg-blue-600', text: 'text-white', hover: 'hover:bg-blue-700', focus: 'focus:ring-blue-500' },
-    secondary: { bg: 'bg-gray-600', text: 'text-white', hover: 'hover:bg-gray-700', focus: 'focus:ring-gray-500' },
-    success: { bg: 'bg-green-600', text: 'text-white', hover: 'hover:bg-green-700', focus: 'focus:ring-green-500' },
-    danger: { bg: 'bg-red-600', text: 'text-white', hover: 'hover:bg-red-700', focus: 'focus:ring-red-500' },
-    error: { bg: 'bg-orange-600', text: 'text-white', hover: 'hover:bg-orange-700', focus: 'focus:ring-orange-500' },
+    primary: {
+        bg: 'bg-blue-600',
+        text: 'text-white',
+        hover: 'hover:bg-blue-700 hover:border-blue-800',
+        focus: 'focus:ring-blue-500',
+        border: 'border-blue-600'
+    },
+    secondary: {
+        bg: 'bg-gray-600',
+        text: 'text-white',
+        hover: 'hover:bg-gray-700 hover:border-gray-800',
+        focus: 'focus:ring-gray-500',
+        border: 'border-gray-600'
+    },
+    success: {
+        bg: 'bg-green-600',
+        text: 'text-white',
+        hover: 'hover:bg-green-700 hover:border-green-800',
+        focus: 'focus:ring-green-500',
+        border: 'border-green-600'
+    },
+    danger: {
+        bg: 'bg-red-600',
+        text: 'text-white',
+        hover: 'hover:bg-red-700 hover:border-red-800',
+        focus: 'focus:ring-red-500',
+        border: 'border-red-600'
+    },
+    error: {
+        bg: 'bg-orange-600',
+        text: 'text-white',
+        hover: 'hover:bg-orange-700 hover:border-orange-800',
+        focus: 'focus:ring-orange-500',
+        border: 'border-orange-600'
+    },
 }
 
 const computedClasses = computed(() => {
     const baseColor = baseColors[props.color] || baseColors.primary;
-    const { bg, text, hover, focus } = baseColor;
+    const { bg, text, hover, focus, border } = baseColor;
 
     const variants = {
-        solid: `${bg} ${text} ${hover} ${focus}`,
-        outline: `border ${focus} ${text} ${hover}`,
-        ghost: `bg-transparent border-transparent ${hover} ${text} ${focus}`,
+        solid: `${bg} ${text} ${hover} ${focus} focus:ring-2 border-2 ${border} hover:border-2`,
+        outline: `border-2 ${border} ${text} ${hover} ${focus} focus:ring-2 bg-transparent hover:bg-opacity-10`,
+        ghost: `bg-transparent border-transparent ${text} ${hover} ${focus} focus:ring-2 hover:border-2 ${border}`,
     };
 
     const sizes = {
@@ -94,6 +124,6 @@ const computedClasses = computed(() => {
         full: 'rounded-full'
     };
 
-    return [props.class, variants[props.variant], sizes[props.size], rounded[props.rounded]].join(" ");
+    return [variants[props.variant], sizes[props.size], rounded[props.rounded]].join(" ");
 })
 </script>
